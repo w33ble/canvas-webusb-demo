@@ -1,6 +1,6 @@
-# canvas-plugin-boilerplate
+# canvas-webusb-demo
 
-> a boilerplate for canvas plugins
+> a canvas plugin with a webusb demo. not intended for use by anyone. 
 
 ---
 
