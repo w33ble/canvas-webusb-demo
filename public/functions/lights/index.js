@@ -1,7 +1,7 @@
 import chroma from 'chroma-js';
 // TODO: internalize this wrapper
 import Fn from '../../../../kibana-canvas/common/functions/fn.js';
-import portController from './port_controller';
+import { connect, getUpdater } from '../../lib/port_controller';
 
 export default new Fn({
   name: 'lights',
@@ -41,7 +41,8 @@ export default new Fn({
       };
     });
 
-    return portController()
+    return connect()
+    .then(port => getUpdater(port))
     .then((setLights) => {
       const summary = values.map((val, i) => {
         // send color data to LEDs
@@ -50,20 +51,6 @@ export default new Fn({
         // create LED info string
         return `${val.name}: ${val.color} (${val.brightness * 100}%)`;
       });
-
-//     return {
-//       type: 'render',
-//       as: 'markdown',
-//       value: {
-//         content: `Check your LED strip
-
-// - ${summary.join('\n- ')}
-
-// \`\`\`
-// ${JSON.stringify(values, null, 2)}
-// \`\`\``,
-//       },
-//     };
 
       return {
         type: 'render',
