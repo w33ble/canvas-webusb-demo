@@ -1,11 +1,11 @@
 class SerialPort {
-  constuctor(device) {
-    this.device_ = device;
+  constructor(device) {
+    this.__device = device;
   }
 
   connect() {
     const readLoop = () => {
-      this.device_.transferIn(5, 64).then((result) => {
+      this.__device.transferIn(5, 64).then((result) => {
         this.onReceive(result.data);
         readLoop();
       }, error => {
@@ -13,15 +13,15 @@ class SerialPort {
       });
     };
 
-    return this.device_.open()
+    return this.__device.open()
     .then(() => {
-      if (this.device_.configuration === null) {
-        return this.device_.selectConfiguration(1);
+      if (this.__device.configuration === null) {
+        return this.__device.selectConfiguration(1);
       }
     })
-    .then(() => this.device_.claimInterface(2))
-    .then(() => this.device_.selectAlternateInterface(2, 0))
-    .then(() => this.device_.controlTransferOut({
+    .then(() => this.__device.claimInterface(2))
+    .then(() => this.__device.selectAlternateInterface(2, 0))
+    .then(() => this.__device.controlTransferOut({
       requestType: 'class',
       recipient: 'interface',
       request: 0x22,
@@ -34,18 +34,18 @@ class SerialPort {
   }
 
   disconnect() {
-    return this.device_.controlTransferOut({
+    return this.__device.controlTransferOut({
       requestType: 'class',
       recipient: 'interface',
       request: 0x22,
       value: 0x00,
       index: 0x02
     })
-    .then(() => this.device_.close());
+    .then(() => this.__device.close());
   }
 
   send(data) {
-    return this.device_.transferOut(4, data);
+    return this.__device.transferOut(4, data);
   }
 }
 
