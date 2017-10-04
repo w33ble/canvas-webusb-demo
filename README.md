@@ -2,6 +2,8 @@
 
 > a canvas plugin with a webusb demo. not intended for use by anyone. 
 
+![chart leds](https://i.imgur.com/v92fPez.jpg)
+
 ---
 
 ## development
