@@ -61,6 +61,8 @@ const filters = [
 
 export const serial = {
   getPorts() {
+    if (!navigator.usb) return Promise.reject(new Error('navigator.usb is not defined'));
+
     return navigator.usb.getDevices().then(devices => {
       return devices.map(device => new SerialPort(device));
     });
