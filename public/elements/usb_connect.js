@@ -11,15 +11,18 @@ export default new Element('usbConnect', {
   render(domNode, config, handlers) {
     app({
       root: domNode,
+      state: {
+        connected: false,
+      },
       actions: {
-        connectUsb() {
-          requestPort().then(() => alert('connected!'));
-        }
+        connectUsb: () => (update) => {
+          requestPort().then(() => update({ connected: true }));
+        },
       },
       view: (state, actions) => (
         h('button', {
           onclick: actions.connectUsb,
-        }, 'Connect USB')
+        }, state.connected ? 'USB Connected!' : 'Connect USB')
       ),
     });
 
