@@ -31,12 +31,14 @@ export function getUpdater(port) {
   if (!port) throw new Error('Must give the updated a port');
 
   return function updatePort(index, rgb) {
+    if (index > 7) return;
+
     const view = new Uint8Array(4);
     view[0] = parseInt(index);
     view[1] = parseInt(rgb[0]);
     view[2] = parseInt(rgb[1]);
     view[3] = parseInt(rgb[2]);
-    console.log('view', view);
+
     port.send(view);
   };
 }

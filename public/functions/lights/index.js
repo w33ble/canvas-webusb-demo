@@ -14,6 +14,7 @@ export default new Fn({
     },
   },
   fn(context, args) {
+    const ledCount = 8;
     const { palette } = args;
 
     // calculate the colors to use for each series
@@ -32,14 +33,17 @@ export default new Fn({
       // TODO this only supports value count of palette color count * 2
       const count = context.rows.length;
       const colorIndex = (i < count) ? i : i - count;
+      const color = colors[colorIndex];
+
+      if (!color || i >= ledCount) return null;
 
       return {
         id: i,
         name: row.color,
-        color: colors[colorIndex],
         brightness: Math.round(row.size / maxVal * 100) / 100,
+        color,
       };
-    });
+    }).filter(Boolean);
 
     return connect()
     .then(port => getUpdater(port))
