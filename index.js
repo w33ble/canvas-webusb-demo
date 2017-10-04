@@ -1,5 +1,3 @@
-import { commonFunctions } from './common/functions';
-
 export default function (kibana) {
   return new kibana.Plugin({
     require: ['canvas'],
@@ -7,7 +5,7 @@ export default function (kibana) {
     uiExports: {
       hacks: [
         // register functions and the like things with canvas
-        'plugins/canvas-github-demo/lib/load_plugin.js',
+        'plugins/canvas-plugin-boilerplate/lib/load_plugin.js',
       ],
     },
 
@@ -16,14 +14,5 @@ export default function (kibana) {
         enabled: Joi.boolean().default(true),
       }).default();
     },
-
-    init(server) {
-      // load server functions here, then:
-      commonFunctions.forEach(fn => server.plugins.canvas.addFunction(fn));
-
-      // load any types as well:
-      const types = [];
-      types.forEach(fn => server.plugins.canvas.addType(fn));
-    }
   });
 }
