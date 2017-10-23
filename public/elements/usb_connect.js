@@ -5,7 +5,7 @@ import { requestPort } from '../lib/port_controller';
 export default {
   name: 'usbConnect',
   displayName: 'Connect USB Device',
-  description: 'Connect a USB device for use with WebUSB',
+  help: 'Connect a USB device for use with WebUSB',
   image: header,
   expression: 'render as="usbConnect"',
   render(domNode, config, handlers) {
