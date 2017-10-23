@@ -1,9 +1,7 @@
 import chroma from 'chroma-js';
-// TODO: internalize this wrapper
-import Fn from '../../../../kibana-canvas/common/functions/fn.js';
 import { connect, getUpdater } from '../../lib/port_controller';
 
-export default new Fn({
+export default {
   name: 'lights',
   type: 'render',
   fn(context) {
@@ -52,4 +50,4 @@ export default new Fn({
       return context;
     });
   }
-});
+};

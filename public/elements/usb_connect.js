@@ -1,9 +1,9 @@
 import { h, app } from 'hyperapp';
-import { Element } from 'plugins/canvas/elements/element';
 import header from './usb_connect.png';
 import { requestPort } from '../lib/port_controller';
 
-export default new Element('usbConnect', {
+export default {
+  name: 'usbConnect',
   displayName: 'Connect USB Device',
   description: 'Connect a USB device for use with WebUSB',
   image: header,
@@ -28,4 +28,4 @@ export default new Element('usbConnect', {
 
     handlers.done();
   },
-});
+};
